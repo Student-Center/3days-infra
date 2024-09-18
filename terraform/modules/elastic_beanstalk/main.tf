@@ -34,12 +34,6 @@ resource aws_elastic_beanstalk_environment env {
   }
 
   setting {
-    namespace = "aws:ec2:vpc"
-    name      = "AvailabilityZones"
-    value     = "ap-northeast-2a,ap-northeast-2c"
-  }
-
-  setting {
     namespace = "aws:autoscaling:asg"
     name      = "MinSize"
     value     = var.min_size
