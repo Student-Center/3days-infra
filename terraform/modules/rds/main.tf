@@ -33,7 +33,6 @@ resource "aws_security_group" "db" {
 }
 
 resource "aws_db_instance" "main" {
-  identifier           = "3days-${var.environment}-db"
   engine               = "mysql"
   engine_version       = "8.0.34"
   instance_class       = "db.t3.micro"

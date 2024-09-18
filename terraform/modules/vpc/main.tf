@@ -42,7 +42,7 @@ resource "aws_subnet" "private" {
 
 resource "aws_eip" "nat" {
   count = 1
-  vpc   = true
+  domain = "vpc"
 
   tags = {
     Name = "3days-${var.environment}-nat-eip"
