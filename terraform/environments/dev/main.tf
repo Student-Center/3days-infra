@@ -5,9 +5,9 @@ provider "aws" {
 
 terraform {
   cloud {
-    organization = "3days"
+    organization = "threedays"
     workspaces {
-      name = "3days-dev"
+      name = "threedays-dev"
     }
   }
 }
@@ -19,7 +19,7 @@ module "vpc" {
 
 module "ecr" {
   source          = "../../modules/ecr"
-  repository_name = "3days-app"
+  repository_name = "threedays-app"
 }
 
 module rds {
@@ -38,7 +38,7 @@ module "elastic_beanstalk" {
   vpc_id                = module.vpc.vpc_id
   public_subnet_ids     = module.vpc.public_subnet_ids
   private_subnet_ids    = module.vpc.private_subnet_ids
-  app_name              = "3days-dev"
+  app_name              = "threedays-dev"
   solution_stack_name   = "64bit Amazon Linux 2023 v4.3.7 running Docker"
   instance_type         = "t2.micro"
   min_size              = 1

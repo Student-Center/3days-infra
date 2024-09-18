@@ -1,15 +1,15 @@
 # /terraform/modules/rds/main.tf
 resource aws_db_subnet_group main {
-  name       = "3days-${var.environment}-db-subnet-group"
+  name       = "threedays-${var.environment}-db-subnet-group"
   subnet_ids = var.subnet_ids
 
   tags = {
-    Name = "3days-${var.environment}-db-subnet-group"
+    Name = "threedays-${var.environment}-db-subnet-group"
   }
 }
 
 resource aws_security_group db {
-  name        = "3days-${var.environment}-db-sg"
+  name        = "threedays-${var.environment}-db-sg"
   description = "Security group for RDS"
   vpc_id      = var.vpc_id
 
@@ -28,7 +28,7 @@ resource aws_security_group db {
   }
 
   tags = {
-    Name = "3days-${var.environment}-db-sg"
+    Name = "threedays-${var.environment}-db-sg"
   }
 }
 
@@ -49,6 +49,6 @@ resource aws_db_instance main {
   skip_final_snapshot  = true
 
   tags = {
-    Name = "3days-${var.environment}-db"
+    Name = "threedays-${var.environment}-db"
   }
 }

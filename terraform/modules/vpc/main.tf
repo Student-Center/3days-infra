@@ -5,7 +5,7 @@ resource "aws_vpc" "main" {
   enable_dns_support   = true
 
   tags = {
-    Name = "3days-${var.environment}-vpc"
+    Name = "threedays-${var.environment}-vpc"
   }
 }
 
@@ -13,7 +13,7 @@ resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "3days-${var.environment}-igw"
+    Name = "threedays-${var.environment}-igw"
   }
 }
 
@@ -25,7 +25,7 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "3days-${var.environment}-public-subnet-${count.index + 1}"
+    Name = "threedays-${var.environment}-public-subnet-${count.index + 1}"
   }
 }
 
@@ -36,7 +36,7 @@ resource "aws_subnet" "private" {
   availability_zone = data.aws_availability_zones.available.names[count.index]
 
   tags = {
-    Name = "3days-${var.environment}-private-subnet-${count.index + 1}"
+    Name = "threedays-${var.environment}-private-subnet-${count.index + 1}"
   }
 }
 
@@ -45,7 +45,7 @@ resource "aws_eip" "nat" {
   domain = "vpc"
 
   tags = {
-    Name = "3days-${var.environment}-nat-eip"
+    Name = "threedays-${var.environment}-nat-eip"
   }
 }
 
@@ -55,7 +55,7 @@ resource "aws_nat_gateway" "main" {
   subnet_id     = aws_subnet.public[0].id
 
   tags = {
-    Name = "3days-${var.environment}-nat-gw"
+    Name = "threedays-${var.environment}-nat-gw"
   }
 }
 
@@ -68,7 +68,7 @@ resource "aws_route_table" "public" {
   }
 
   tags = {
-    Name = "3days-${var.environment}-public-rt"
+    Name = "threedays-${var.environment}-public-rt"
   }
 }
 
@@ -81,7 +81,7 @@ resource "aws_route_table" "private" {
   }
 
   tags = {
-    Name = "3days-${var.environment}-private-rt"
+    Name = "threedays-${var.environment}-private-rt"
   }
 }
 

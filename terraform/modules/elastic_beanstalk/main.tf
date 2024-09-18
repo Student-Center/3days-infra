@@ -1,7 +1,7 @@
 # /terraform/modules/elastic_beanstalk/main.tf
 resource aws_elastic_beanstalk_application app {
   name        = var.app_name
-  description = "3days application"
+  description = "threedays application"
 }
 
 resource aws_elastic_beanstalk_environment env {
