@@ -4,7 +4,7 @@ resource aws_elastic_beanstalk_application app {
   description = "threedays application"
 }
 
-resource aws_elastic_beanstalk_environment env {
+resource "aws_elastic_beanstalk_environment" "env" {
   name                = "${var.app_name}-env"
   application         = aws_elastic_beanstalk_application.app.name
   solution_stack_name = var.solution_stack_name
@@ -31,6 +31,12 @@ resource aws_elastic_beanstalk_environment env {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "InstanceType"
     value     = var.instance_type
+  }
+
+  setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name      = "IamInstanceProfile"
+    value     = aws_iam_instance_profile.beanstalk_instance_profile.name
   }
 
   setting {
@@ -156,4 +162,31 @@ resource aws_security_group_rule allow_eb_to_rds {
   protocol                 = "tcp"
   source_security_group_id = aws_security_group.eb_sg.id
   security_group_id        = var.rds_security_group_id
+}
+
+resource "aws_iam_role" "beanstalk_instance_role" {
+  name = "beanstalk-instance-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = "sts:AssumeRole",
+        Effect = "Allow",
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "beanstalk_instance_role_policy" {
+  role       = aws_iam_role.beanstalk_instance_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
+
+resource "aws_iam_instance_profile" "beanstalk_instance_profile" {
+  name = "beanstalk-instance-profile"
+  role = aws_iam_role.beanstalk_instance_role.name
 }
