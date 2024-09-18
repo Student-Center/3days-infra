@@ -1,10 +1,10 @@
 # /terraform/modules/elastic_beanstalk/main.tf
-resource "aws_elastic_beanstalk_application" "app" {
+resource aws_elastic_beanstalk_application app {
   name        = var.app_name
   description = "3days application"
 }
 
-resource "aws_elastic_beanstalk_environment" "env" {
+resource aws_elastic_beanstalk_environment env {
   name                = "${var.app_name}-env"
   application         = aws_elastic_beanstalk_application.app.name
   solution_stack_name = var.solution_stack_name
@@ -132,7 +132,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
   }
 }
 
-resource "aws_security_group" "eb_sg" {
+resource aws_security_group eb_sg {
   name        = "${var.app_name}-eb-sg"
   description = "Security group for Elastic Beanstalk environment"
   vpc_id      = var.vpc_id
@@ -156,7 +156,7 @@ resource "aws_security_group" "eb_sg" {
   }
 }
 
-resource "aws_security_group_rule" "allow_eb_to_rds" {
+resource aws_security_group_rule allow_eb_to_rds {
   type                     = "ingress"
   from_port                = 3306
   to_port                  = 3306

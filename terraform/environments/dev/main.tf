@@ -22,7 +22,7 @@ module "ecr" {
   repository_name = "3days-app"
 }
 
-module "rds" {
+module rds {
   source      = "../../modules/rds"
   environment = "dev"
   vpc_id      = module.vpc.vpc_id

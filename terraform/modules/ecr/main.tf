@@ -1,5 +1,5 @@
 # /terraform/modules/ecr/main.tf
-resource "aws_ecr_repository" "app" {
+resource aws_ecr_repository app {
   name                 = var.repository_name
   image_tag_mutability = "MUTABLE"
 
@@ -8,7 +8,7 @@ resource "aws_ecr_repository" "app" {
   }
 }
 
-resource "aws_ecr_lifecycle_policy" "app" {
+resource aws_ecr_lifecycle_policy app {
   repository = aws_ecr_repository.app.name
 
   policy = jsonencode({

@@ -1,5 +1,5 @@
 # /terraform/modules/rds/main.tf
-resource "aws_db_subnet_group" "main" {
+resource aws_db_subnet_group main {
   name       = "3days-${var.environment}-db-subnet-group"
   subnet_ids = var.subnet_ids
 
@@ -8,7 +8,7 @@ resource "aws_db_subnet_group" "main" {
   }
 }
 
-resource "aws_security_group" "db" {
+resource aws_security_group db {
   name        = "3days-${var.environment}-db-sg"
   description = "Security group for RDS"
   vpc_id      = var.vpc_id
@@ -32,7 +32,7 @@ resource "aws_security_group" "db" {
   }
 }
 
-resource "aws_db_instance" "main" {
+resource aws_db_instance main {
   engine               = "mysql"
   engine_version       = "8.0.34"
   instance_class       = "db.t3.micro"
