@@ -88,12 +88,17 @@ resource aws_elastic_beanstalk_environment env {
   }
 
   setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "SWAP_FILE_SIZE_MB"
+    value     = "2048"
+  }
+
+  setting {
     namespace = "aws:elasticbeanstalk:healthreporting:system"
     name      = "SystemType"
     value     = "enhanced"
   }
 
-  # 메모리 스왑 공간을 늘리는 설정 (dev 환경에만 적용)
   setting {
     namespace = "aws:elasticbeanstalk:command"
     name      = "DeploymentPolicy"
@@ -112,22 +117,10 @@ resource aws_elastic_beanstalk_environment env {
     value     = "1"
   }
 
+  # Add a custom option for the swap file setup
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "SWAP_FILE_SIZE_MB"
-    value     = "2048"
-  }
-
-  # 메모리 스왑 공간을 늘리는 스크립트 실행
-  setting {
-    namespace = "aws:elasticbeanstalk:container:docker:daemon"
-    name      = "RootDirectory"
-    value     = "/var/app/current"
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:container:docker:daemon"
-    name      = "Commands"
+    name      = "SWAP_SETUP_COMMAND"
     value     = "sudo /bin/dd if=/dev/zero of=/var/swapfile bs=1M count=$SWAP_FILE_SIZE_MB && sudo /sbin/mkswap /var/swapfile && sudo /sbin/swapon /var/swapfile"
   }
 }
