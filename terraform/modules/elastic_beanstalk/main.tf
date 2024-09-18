@@ -82,8 +82,8 @@ resource aws_elastic_beanstalk_environment env {
   }
 
   setting {
-    namespace = "aws:elasticbeanstalk:container:docker"
-    name      = "Image"
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "DOCKER_IMAGE"
     value     = "${var.ecr_repository_url}:latest"
   }
 

@@ -5,9 +5,9 @@ provider "aws" {
 
 terraform {
   cloud {
-    organization = "threedays"
+    organization = "3days"
     workspaces {
-      name = "threedays-dev"
+      name = "3days-dev"
     }
   }
 }
