@@ -129,6 +129,42 @@ resource "aws_elastic_beanstalk_environment" "env" {
     name      = "SWAP_SETUP_COMMAND"
     value     = "sudo /bin/dd if=/dev/zero of=/var/swapfile bs=1M count=$SWAP_FILE_SIZE_MB && sudo /sbin/mkswap /var/swapfile && sudo /sbin/swapon /var/swapfile"
   }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "LoadBalancerType"
+    value     = "application"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:default"
+    name      = "ListenerEnabled"
+    value     = "true"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:default"
+    name      = "Protocol"
+    value     = "HTTP"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:default"
+    name      = "Port"
+    value     = 80
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:environment:process:default"
+    name      = "Port"
+    value     = 8080
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:environment:process:default"
+    name      = "Protocol"
+    value     = "HTTP"
+  }
 }
 
 resource aws_security_group eb_sg {
