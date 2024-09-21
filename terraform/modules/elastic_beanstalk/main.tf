@@ -132,32 +132,26 @@ resource "aws_elastic_beanstalk_environment" "env" {
 
   # 로드 밸런서 리스너 설정
   setting {
-    namespace = "aws:elbv2:listener:80"
+    namespace = "aws:elbv2:listener"
     name      = "ListenerEnabled"
     value     = "true"
   }
 
   setting {
-    namespace = "aws:elbv2:listener:80"
-    name      = "InstancePort"
-    value     = "8080"
-  }
-
-  setting {
-    namespace = "aws:elbv2:listener:80"
-    name      = "Protocol"
+    namespace = "aws:elbv2:listener"
+    name      = "ListenerProtocol"
     value     = "HTTP"
   }
 
   setting {
-    namespace = "aws:elasticbeanstalk:environment:proxy"
-    name      = "ProxyServer"
-    value     = "nginx"
+    namespace = "aws:elbv2:listener"
+    name      = "ListenerPort"
+    value     = "80"
   }
 
   setting {
-    namespace = "aws:elasticbeanstalk:environment:proxy"
-    name      = "ProxyPort"
+    namespace = "aws:elbv2:listener"
+    name      = "InstancePort"
     value     = "8080"
   }
 }
