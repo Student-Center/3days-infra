@@ -53,42 +53,6 @@ resource "aws_elastic_beanstalk_environment" "env" {
 
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "DB_HOST"
-    value     = var.db_endpoint
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "DB_PORT"
-    value     = "3306"
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "DB_NAME"
-    value     = var.db_name
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "DB_USERNAME"
-    value     = var.db_username
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "DB_PASSWORD"
-    value     = var.db_password
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:application:environment"
-    name      = "SPRING_PROFILES_ACTIVE"
-    value     = var.environment
-  }
-
-  setting {
-    namespace = "aws:elasticbeanstalk:application:environment"
     name      = "DOCKER_IMAGE"
     value     = "${var.ecr_repository_url}:latest"
   }
