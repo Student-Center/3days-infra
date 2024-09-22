@@ -179,3 +179,13 @@ resource "aws_iam_instance_profile" "beanstalk_instance_profile" {
   name = "beanstalk-instance-profile"
   role = aws_iam_role.beanstalk_instance_role.name
 }
+
+resource "aws_iam_role_policy_attachment" "beanstalk_instance_role_policy_web_tier" {
+  role       = aws_iam_role.beanstalk_instance_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier"
+}
+
+resource "aws_iam_role_policy_attachment" "beanstalk_instance_role_policy_cloudwatch" {
+  role       = aws_iam_role.beanstalk_instance_role.name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+}
