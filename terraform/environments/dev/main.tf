@@ -37,7 +37,6 @@ module "elastic_beanstalk" {
   environment           = "dev"
   vpc_id                = module.vpc.vpc_id
   public_subnet_ids     = module.vpc.public_subnet_ids
-  private_subnet_ids    = module.vpc.private_subnet_ids
   app_name              = "threedays-dev"
   solution_stack_name   = "64bit Amazon Linux 2023 v4.3.7 running Docker"
   instance_type         = "t2.micro"

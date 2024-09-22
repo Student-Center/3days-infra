@@ -14,11 +14,6 @@ variable "public_subnet_ids" {
   type = list(string)
 }
 
-variable "private_subnet_ids" {
-  description = "List of private subnet IDs"
-  type = list(string)
-}
-
 variable "app_name" {
   description = "Name of the Elastic Beanstalk application"
   type        = string
