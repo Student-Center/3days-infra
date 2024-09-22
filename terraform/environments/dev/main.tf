@@ -27,9 +27,6 @@ module rds {
   environment = "dev"
   vpc_id      = module.vpc.vpc_id
   subnet_ids  = module.vpc.private_subnet_ids
-  db_name     = "threedaysdev"
-  db_username = var.db_username
-  db_password = var.db_password
 }
 
 module "elastic_beanstalk" {
@@ -43,10 +40,6 @@ module "elastic_beanstalk" {
   instance_type         = "t2.micro"
   min_size              = 1
   max_size              = 2
-  db_endpoint           = module.rds.db_endpoint
-  db_name               = module.rds.db_name
-  db_username           = var.db_username
-  db_password           = var.db_password
   ecr_repository_url    = module.ecr.repository_url
   rds_security_group_id = module.rds.db_security_group_id
 }
