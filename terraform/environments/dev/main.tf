@@ -22,7 +22,7 @@ module "ecr" {
   repository_name = "threedays-app"
 }
 
-module rds {
+module "rds" {
   source      = "../../modules/rds"
   environment = "dev"
   vpc_id      = module.vpc.vpc_id
@@ -30,6 +30,13 @@ module rds {
   db_name     = "threedaysdev"
   db_username = var.db_username
   db_password = var.db_password
+}
+
+module "redis" {
+  source      = "../../modules/elastic_cache"
+  environment = "dev"
+  vpc_id      = module.vpc.vpc_id
+  subnet_ids  = module.vpc.private_subnet_ids
 }
 
 module "elastic_beanstalk" {
