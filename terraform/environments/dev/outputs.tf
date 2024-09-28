@@ -13,3 +13,8 @@ output "rds_endpoint" {
   description = "Endpoint of the RDS instance"
   value       = module.rds.db_endpoint
 }
+
+output "redis_endpoint" {
+  description = "Endpoint of the ElastiCache Redis cluster"
+  value       = module.redis.redis_endpoint
+}
