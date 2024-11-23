@@ -52,3 +52,9 @@ module "elastic_beanstalk" {
   ecr_repository_url    = module.ecr.repository_url
   rds_security_group_id = module.rds.db_security_group_id
 }
+
+module "image_bucket" {
+  source      = "../../modules/s3"
+  environment = "dev"
+  bucket_name = "threedays-dev-image-bucket"
+}

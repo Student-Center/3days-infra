@@ -18,3 +18,8 @@ output "redis_endpoint" {
   description = "Endpoint of the ElastiCache Redis cluster"
   value       = module.redis.redis_endpoint
 }
+
+output "image_bucket_name" {
+  description = "Name of the S3 bucket"
+  value       = module.image_bucket.bucket_name
+}
