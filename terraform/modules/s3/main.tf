@@ -1,5 +1,4 @@
 resource "aws_s3_bucket" "image_bucket" {
-    provider = aws.ap-northeast-2
     bucket = var.bucket_name
 
     tags = {
@@ -9,7 +8,6 @@ resource "aws_s3_bucket" "image_bucket" {
 }
 
 resource aws_s3_bucket_ownership_controls image_bucket_ownership_controls {
-  provider = aws.ap-northeast-2
   bucket   = aws_s3_bucket.image_bucket.id
   rule {
     object_ownership = "BucketOwnerPreferred"
@@ -17,7 +15,6 @@ resource aws_s3_bucket_ownership_controls image_bucket_ownership_controls {
 }
 
 resource aws_s3_bucket_public_access_block image_bucket_public_access_block {
-  provider = aws.ap-northeast-2
   bucket   = aws_s3_bucket.image_bucket.id
 
   block_public_acls       = false
@@ -27,7 +24,6 @@ resource aws_s3_bucket_public_access_block image_bucket_public_access_block {
 }
 
 resource aws_s3_bucket_acl image_bucket_acl {
-  provider   = aws.ap-northeast-2
   depends_on = [
     aws_s3_bucket_ownership_controls.image_bucket_ownership_controls,
     aws_s3_bucket_public_access_block.image_bucket_public_access_block,
