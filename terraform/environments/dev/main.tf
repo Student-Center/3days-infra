@@ -58,3 +58,9 @@ module "image_bucket" {
   environment = "dev"
   bucket_name = "threedays-dev-image-bucket"
 }
+
+module "iam" {
+  source                      = "../../modules/iam"
+  beanstalk_instance_role_id = module.elastic_beanstalk.instance_role_id
+  s3_bucket_arn              = module.image_bucket.bucket_arn
+}
