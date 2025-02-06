@@ -105,24 +105,25 @@ resource "aws_elastic_beanstalk_environment" "env" {
     namespace = "aws:elasticbeanstalk:environment"
     name      = "EnvironmentType"
     value     = "LoadBalanced"
+    resource  = ""
   }
-
   setting {
     namespace = "aws:elasticbeanstalk:environment"
     name      = "LoadBalancerType"
     value     = "application"
+    resource  = ""
   }
-
   setting {
     namespace = "aws:elbv2:listener:80"
     name      = "ListenerEnabled"
     value     = "true"
+    resource  = ""
   }
-
   setting {
     namespace = "aws:elbv2:listener:80"
     name      = "Protocol"
     value     = "HTTP"
+    resource  = ""
   }
 }
 
