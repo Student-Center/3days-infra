@@ -102,6 +102,12 @@ resource "aws_elastic_beanstalk_environment" "env" {
 
   # 로드 밸런서 리스너 설정
   setting {
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "LoadBalancerType"
+    value     = "application"
+  }
+
+  setting {
     namespace = "aws:elbv2:listener"
     name      = "ListenerEnabled"
     value     = "true"
