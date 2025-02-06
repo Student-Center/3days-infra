@@ -108,25 +108,19 @@ resource "aws_elastic_beanstalk_environment" "env" {
   }
 
   setting {
-    namespace = "aws:elbv2:listener"
+    namespace = "aws:elbv2:listener:80"
     name      = "ListenerEnabled"
     value     = "true"
   }
 
   setting {
-    namespace = "aws:elbv2:listener"
+    namespace = "aws:elbv2:listener:80"
     name      = "ListenerProtocol"
     value     = "HTTP"
   }
 
   setting {
-    namespace = "aws:elbv2:listener"
-    name      = "ListenerPort"
-    value     = "80"
-  }
-
-  setting {
-    namespace = "aws:elbv2:listener"
+    namespace = "aws:elbv2:listener:80"
     name      = "InstancePort"
     value     = "8080"
   }
