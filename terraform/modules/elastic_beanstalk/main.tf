@@ -115,14 +115,8 @@ resource "aws_elastic_beanstalk_environment" "env" {
 
   setting {
     namespace = "aws:elbv2:listener:80"
-    name      = "ListenerProtocol"
+    name      = "Protocol"
     value     = "HTTP"
-  }
-
-  setting {
-    namespace = "aws:elbv2:listener:80"
-    name      = "InstancePort"
-    value     = "8080"
   }
 }
 
