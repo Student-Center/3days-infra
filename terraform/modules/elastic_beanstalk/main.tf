@@ -125,6 +125,45 @@ resource "aws_elastic_beanstalk_environment" "env" {
     value     = "HTTP"
     resource  = ""
   }
+
+  # 헬스체크 경로 설정 추가
+  setting {
+    namespace = "aws:elasticbeanstalk:environment"
+    name      = "HealthCheckPath"
+    value     = "/actuator/health"
+  }
+
+  # ALB (Application Load Balancer) 헬스체크 경로 변경
+  setting {
+    namespace = "aws:elbv2:listener:80"
+    name      = "HealthCheckPath"
+    value     = "/actuator/health"
+  }
+
+  # ALB 헬스체크 응답 대기 시간 (타임아웃) 설정
+  setting {
+    namespace = "aws:elbv2:listener:80"
+    name      = "HealthCheckIntervalSeconds"
+    value     = "10"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:80"
+    name      = "HealthCheckTimeoutSeconds"
+    value     = "5"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:80"
+    name      = "HealthyThresholdCount"
+    value     = "3"
+  }
+
+  setting {
+    namespace = "aws:elbv2:listener:80"
+    name      = "UnhealthyThresholdCount"
+    value     = "3"
+  }
 }
 
 resource aws_security_group eb_sg {
