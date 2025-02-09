@@ -135,22 +135,29 @@ resource "aws_elastic_beanstalk_environment" "env" {
 
 }
 
-resource aws_security_group eb_sg {
+resource "aws_security_group" "eb_sg" {
   name        = "${var.app_name}-eb-sg"
   description = "Security group for Elastic Beanstalk environment"
   vpc_id      = var.vpc_id
 
   ingress {
-    from_port = 80
-    to_port   = 80
-    protocol  = "tcp"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  # 모든 IP 허용 (보안이 필요하면 제한 가능)
+  }
+
   egress {
-    from_port = 0
-    to_port   = 0
-    protocol  = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
